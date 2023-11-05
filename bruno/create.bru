@@ -1,0 +1,23 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}{{port}}/monstros
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Goblin",
+    "descricao": "Uma criatura verde pequena e maliciosa",
+    "tipo": "Humanoide",
+    "tamanho": "Pequeno",
+    "pontosDeVida": 7,
+    "dano": 5,
+    "chefe": false
+  }
+}
