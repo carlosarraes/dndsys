@@ -15,13 +15,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@RequestMapping("/monstros")
 public class MonsterController {
   @Autowired private MonstroService monstroService;
 
-  @GetMapping("/monstros")
+  @GetMapping("")
   public ResponseEntity<?> getAll() {
     try {
       List<Monstro> monstros =
@@ -35,7 +37,7 @@ public class MonsterController {
     }
   }
 
-  @GetMapping("/monstros/{id}")
+  @GetMapping("/{id}")
   public ResponseEntity<?> getById(@PathVariable Integer id) {
     try {
       Monstro monstro = monstroService.findById(id);
@@ -47,7 +49,7 @@ public class MonsterController {
     }
   }
 
-  @PostMapping("/monstros")
+  @PostMapping("")
   public ResponseEntity<?> create(@RequestBody Monstro monstro) {
     try {
       Integer id = monstroService.create(monstro);
@@ -59,7 +61,7 @@ public class MonsterController {
     }
   }
 
-  @DeleteMapping("/monstros/{id}")
+  @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Integer id) {
     try {
       monstroService.delete(id);
@@ -71,7 +73,7 @@ public class MonsterController {
     }
   }
 
-  @PutMapping("/monstros/{id}")
+  @PutMapping("/{id}")
   public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Monstro monstro) {
     try {
       monstroService.update(id, monstro);
