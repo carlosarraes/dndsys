@@ -26,6 +26,10 @@ public class HeroService {
         .orElseThrow(() -> new EntityNotFoundException(heroNotFoundMessage));
   }
 
+  public Hero findByArmaId(Integer armaId) {
+    return heroRepository.findByArma_Id(armaId);
+  }
+
   @Transactional
   public Integer create(Hero hero) {
     Hero newHero = heroRepository.save(hero);
