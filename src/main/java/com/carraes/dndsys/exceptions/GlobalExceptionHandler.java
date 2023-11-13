@@ -18,6 +18,13 @@ public class GlobalExceptionHandler {
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorBody);
   }
 
+  @ExceptionHandler(ItemInUseException.class)
+  public ResponseEntity<Map<String, String>> handleItemInUseException(ItemInUseException ex) {
+    Map<String, String> errorBody = new HashMap<>();
+    errorBody.put("error", ex.getMessage());
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorBody);
+  }
+
   @ExceptionHandler(RuntimeException.class)
   public ResponseEntity<Map<String, String>> handleRuntimeException(RuntimeException ex) {
     Map<String, String> errorBody = new HashMap<>();
