@@ -1,6 +1,8 @@
 package com.carraes.dndsys.services;
 
+import com.carraes.dndsys.exceptions.ItemInUseException;
 import com.carraes.dndsys.models.Weapon;
+import com.carraes.dndsys.repositories.HeroRepository;
 import com.carraes.dndsys.repositories.WeaponRepository;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
@@ -9,7 +11,9 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class WeaponService {
+  private String weaponNotFound = "Arma não encontrada";
   @Autowired private WeaponRepository weaponRepository;
+  @Autowired private HeroRepository heroRepository;
 
   public Iterable<Weapon> findAll() {
     return weaponRepository.findAll();
@@ -18,7 +22,7 @@ public class WeaponService {
   public Weapon findById(Integer id) {
     return weaponRepository
         .findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Arma não encontrada"));
+        .orElseThrow(() -> new EntityNotFoundException(weaponNotFound));
   }
 
   @Transactional
@@ -33,7 +37,7 @@ public class WeaponService {
     Weapon weaponToUpdate =
         weaponRepository
             .findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Arma não encontrada"));
+            .orElseThrow(() -> new EntityNotFoundException(weaponNotFound));
 
     weaponToUpdate.setNome(weapon.getNome());
     weaponToUpdate.setDano(weapon.getDano());
@@ -47,7 +51,11 @@ public class WeaponService {
     Weapon weaponToDelete =
         weaponRepository
             .findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Arma não encontrada"));
+            .orElseThrow(() -> new EntityNotFoundException(weaponNotFound));
+
+    if (heroRepository.findByArma_Id(id) != null) {
+      throw new ItemInUseException("Arma está sendo usada por um herói");
+    }
 
     weaponRepository.delete(weaponToDelete);
   }
