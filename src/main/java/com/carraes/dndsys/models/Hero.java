@@ -3,10 +3,8 @@ package com.carraes.dndsys.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "herois")
 public class Hero extends Character {
   private Integer pontosDeVida;
   private String classe;

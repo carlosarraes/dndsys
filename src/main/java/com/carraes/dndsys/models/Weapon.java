@@ -4,9 +4,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "armas")
 public class Weapon {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,8 +16,6 @@ public class Weapon {
   private Integer dano;
   private String tipo;
   private String nome;
-
-  @OneToOne private Hero hero;
 
   public Weapon() {}
 
@@ -58,26 +57,8 @@ public class Weapon {
     this.nome = nome;
   }
 
-  public Hero getHero() {
-    return hero;
-  }
-
-  public void setHero(Hero hero) {
-    this.hero = hero;
-  }
-
   @Override
   public String toString() {
-    return "Weapon [dano="
-        + dano
-        + ", hero="
-        + hero
-        + ", id="
-        + id
-        + ", nome="
-        + nome
-        + ", tipo="
-        + tipo
-        + "]";
+    return "Weapon [dano=" + dano + ", id=" + id + ", nome=" + nome + ", tipo=" + tipo + "]";
   }
 }

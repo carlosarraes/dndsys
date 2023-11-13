@@ -1,10 +1,8 @@
 package com.carraes.dndsys.models;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "npc")
 public class Npc extends Character {
   private String classe;
   private Boolean mercador;
