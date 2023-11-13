@@ -1,5 +1,6 @@
 package com.carraes.dndsys.controllers;
 
+import com.carraes.dndsys.dto.CreateResponse;
 import com.carraes.dndsys.models.Npc;
 import com.carraes.dndsys.services.NpcService;
 import java.util.List;
@@ -41,20 +42,26 @@ public class NpcController {
   public ResponseEntity<?> create(@RequestBody Npc npc) {
     Integer id = npcService.create(npc);
 
-    return ResponseEntity.ok(id);
+    CreateResponse response = new CreateResponse("NPC criado com id " + id);
+
+    return ResponseEntity.ok(response);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Integer id) {
     npcService.delete(id);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("NPC deletado com id " + id);
+
+    return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Npc npc) {
     npcService.update(id, npc);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("NPC atualizado com id " + id);
+
+    return ResponseEntity.ok(response);
   }
 }

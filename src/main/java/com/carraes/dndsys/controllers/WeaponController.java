@@ -1,5 +1,6 @@
 package com.carraes.dndsys.controllers;
 
+import com.carraes.dndsys.dto.CreateResponse;
 import com.carraes.dndsys.models.Weapon;
 import com.carraes.dndsys.services.WeaponService;
 import java.util.List;
@@ -41,20 +42,26 @@ public class WeaponController {
   public ResponseEntity<?> create(@RequestBody Weapon arma) {
     Integer id = weaponService.create(arma);
 
-    return ResponseEntity.ok(id);
+    CreateResponse response = new CreateResponse("Arma criada com id " + id);
+
+    return ResponseEntity.ok(response);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Integer id) {
     weaponService.delete(id);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("Arma com id " + id + " deletada com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Weapon arma) {
     weaponService.update(id, arma);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("Arma com id " + id + " atualizada com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 }

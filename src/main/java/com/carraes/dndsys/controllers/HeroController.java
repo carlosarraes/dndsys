@@ -1,5 +1,6 @@
 package com.carraes.dndsys.controllers;
 
+import com.carraes.dndsys.dto.CreateResponse;
 import com.carraes.dndsys.models.Hero;
 import com.carraes.dndsys.services.HeroService;
 import java.util.List;
@@ -42,27 +43,35 @@ public class HeroController {
   public ResponseEntity<?> create(@RequestBody Hero heroi) {
     Integer id = heroService.create(heroi);
 
-    return ResponseEntity.ok(id);
+    CreateResponse response = new CreateResponse("Herói criado com id " + id);
+
+    return ResponseEntity.ok(response);
   }
 
   @PatchMapping("/{heroId}/add/{weaponId}")
   public ResponseEntity<?> addWeapon(@PathVariable Integer heroId, @PathVariable Integer weaponId) {
     heroService.assignWeapon(heroId, weaponId);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("Arma adicionada ao herói com id " + heroId);
+
+    return ResponseEntity.ok(response);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Integer id) {
     heroService.delete(id);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("Herói com id " + id + " deletado com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Hero heroi) {
     heroService.update(id, heroi);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("Herói com id " + id + " atualizado com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 }

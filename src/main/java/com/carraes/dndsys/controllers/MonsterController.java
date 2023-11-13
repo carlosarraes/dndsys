@@ -1,5 +1,6 @@
 package com.carraes.dndsys.controllers;
 
+import com.carraes.dndsys.dto.CreateResponse;
 import com.carraes.dndsys.models.Monstro;
 import com.carraes.dndsys.services.MonstroService;
 import java.util.List;
@@ -41,20 +42,27 @@ public class MonsterController {
   public ResponseEntity<?> create(@RequestBody Monstro monstro) {
     Integer id = monstroService.create(monstro);
 
-    return ResponseEntity.ok(id);
+    CreateResponse response = new CreateResponse("Monstro criado com id " + id);
+
+    return ResponseEntity.ok(response);
   }
 
   @DeleteMapping("/{id}")
   public ResponseEntity<?> delete(@PathVariable Integer id) {
     monstroService.delete(id);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response = new CreateResponse("Monstro com id " + id + " deletado com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 
   @PutMapping("/{id}")
   public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Monstro monstro) {
     monstroService.update(id, monstro);
 
-    return ResponseEntity.ok().build();
+    CreateResponse response =
+        new CreateResponse("Monstro com id " + id + " atualizado com sucesso");
+
+    return ResponseEntity.ok(response);
   }
 }
