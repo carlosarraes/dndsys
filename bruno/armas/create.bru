@@ -1,0 +1,19 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}{{port}}/armas
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "dano": 10,
+    "tipo": "Perfurante",
+    "nome": "Lança"
+  }
+}

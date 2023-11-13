@@ -1,0 +1,21 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}{{port}}/npcs
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Bela",
+    "descricao": "Humana",
+    "nivel": 20,
+    "classe": "Alquimista",
+    "mercador": true
+  }
+}

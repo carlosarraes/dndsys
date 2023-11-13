@@ -1,0 +1,21 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{url}}{{port}}/herois
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Beth",
+    "descricao": "Elfa",
+    "nivel": 2,
+    "pontosDeVida": 110,
+    "classe": "Aqueira"
+  }
+}

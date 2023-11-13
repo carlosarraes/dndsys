@@ -1,0 +1,23 @@
+meta {
+  name: assign
+  type: http
+  seq: 4
+}
+
+patch {
+  url: {{url}}{{port}}/herois/2/add/2
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Hobgoblin",
+    "descricao": "Uma criatura verde pequena e maliciosa",
+    "tipo": "Humanoide",
+    "tamanho": "Pequeno",
+    "pontosDeVida": 7,
+    "dano": 5,
+    "chefe": false
+  }
+}

@@ -1,0 +1,23 @@
+meta {
+  name: update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{url}}{{port}}/npcs/1
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "nome": "Hobgoblin",
+    "descricao": "Uma criatura verde pequena e maliciosa",
+    "tipo": "Humanoide",
+    "tamanho": "Pequeno",
+    "pontosDeVida": 7,
+    "dano": 5,
+    "chefe": false
+  }
+}
