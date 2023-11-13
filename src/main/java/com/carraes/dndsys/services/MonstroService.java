@@ -14,25 +14,22 @@ public class MonstroService {
   }
 
   public Monstro findById(Integer id) {
-    if (!monstroRepository.existsById(id)) {
-      throw new RuntimeException("Monstro não encontrado");
-    }
-
-    return monstroRepository.findById(id).get();
+    return monstroRepository
+        .findById(id)
+        .orElseThrow(() -> new RuntimeException("Monstro não encontrado"));
   }
 
   public Integer create(Monstro monstro) {
-    System.out.println(monstro);
     Monstro newMonster = monstroRepository.save(monstro);
 
     return newMonster.getId();
   }
 
   public void update(Integer id, Monstro monstro) {
-    Monstro monstroToUpdate = monstroRepository.findById(id).get();
-    if (monstroToUpdate == null) {
-      throw new RuntimeException("Monstro não encontrado");
-    }
+    Monstro monstroToUpdate =
+        monstroRepository
+            .findById(id)
+            .orElseThrow(() -> new RuntimeException("Monstro não encontrado"));
 
     monstroToUpdate.setNome(monstro.getNome());
     monstroToUpdate.setDescricao(monstro.getDescricao());
@@ -46,10 +43,11 @@ public class MonstroService {
   }
 
   public void delete(Integer id) {
-    if (!monstroRepository.existsById(id)) {
-      throw new RuntimeException("Monstro não encontrado");
-    }
+    Monstro monstroToDelete =
+        monstroRepository
+            .findById(id)
+            .orElseThrow(() -> new RuntimeException("Monstro não encontrado"));
 
-    monstroRepository.deleteById(id);
+    monstroRepository.delete(monstroToDelete);
   }
 }
