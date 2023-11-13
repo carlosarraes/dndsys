@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MonstroService {
+  private String monsterNotFoundMessage = "Monstro não encontrado";
+
   @Autowired private MonstroRepository monstroRepository;
 
   public Iterable<Monstro> findAll() {
@@ -18,7 +20,7 @@ public class MonstroService {
   public Monstro findById(Integer id) {
     return monstroRepository
         .findById(id)
-        .orElseThrow(() -> new EntityNotFoundException("Monstro não encontrado"));
+        .orElseThrow(() -> new EntityNotFoundException(monsterNotFoundMessage));
   }
 
   @Transactional
@@ -33,7 +35,7 @@ public class MonstroService {
     Monstro monstroToUpdate =
         monstroRepository
             .findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Monstro não encontrado"));
+            .orElseThrow(() -> new EntityNotFoundException(monsterNotFoundMessage));
 
     monstroToUpdate.setNome(monstro.getNome());
     monstroToUpdate.setDescricao(monstro.getDescricao());
@@ -51,7 +53,7 @@ public class MonstroService {
     Monstro monstroToDelete =
         monstroRepository
             .findById(id)
-            .orElseThrow(() -> new EntityNotFoundException("Monstro não encontrado"));
+            .orElseThrow(() -> new EntityNotFoundException(monsterNotFoundMessage));
 
     monstroRepository.delete(monstroToDelete);
   }
