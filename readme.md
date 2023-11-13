@@ -8,15 +8,13 @@ Primeiramente, clone o repositório para a sua máquina local. É necessário te
 
 Execute os seguintes comandos para iniciar o banco de dados e a aplicação:
 
-    Iniciar o banco de dados com Docker Compose:
-        `docker compose up -d`
+1- Iniciar o banco de dados com Docker Compose:
+    `docker compose up -d`
 
-Este comando inicia o banco de dados PostgreSQL em um container Docker.
+2- Iniciar a aplicação Spring Boot com Maven:
+    `mvn spring-boot:run`
 
-    Iniciar a aplicação Spring Boot com Maven:
-        `mvn spring-boot:run`
-
-Este comando inicia a aplicação na sua máquina local. Por padrão, a aplicação estará disponível em http://localhost:8080.
+Por padrão, a aplicação estará disponível em http://localhost:8080.
 
 ### Como Utilizar
 
